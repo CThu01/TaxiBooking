@@ -4,6 +4,8 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,6 +17,7 @@ import lombok.Data;
 public class Drivers {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int loginId;
 	@Column(nullable = false)
 	private String name;
@@ -28,7 +31,7 @@ public class Drivers {
 	private String address;
 	@Column(nullable = false)
 	private String driversPhoto;
-	
+	@Column(nullable = false)
 	private LocalDate dateOfBrith;
 	private String email;
 	

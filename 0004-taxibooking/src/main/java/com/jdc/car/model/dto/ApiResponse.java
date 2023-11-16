@@ -9,4 +9,8 @@ public record ApiResponse<T>(
 		return new ApiResponse<T>(true, payload);
 	}
 
+	public static<T> ApiResponse<T> fail(T payload){
+		return new ApiResponse<T>(false, payload);
+	}
+	
 }
