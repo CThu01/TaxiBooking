@@ -21,7 +21,7 @@ public class Bookings {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int transactionId;
+	private int bookingId;
 	
 	@OneToOne
 	@JoinColumn(nullable = false)

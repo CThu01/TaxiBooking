@@ -34,6 +34,7 @@ public class Drivers {
 	@Column(nullable = false)
 	private LocalDate dateOfBrith;
 	private String email;
+	private int star;
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
