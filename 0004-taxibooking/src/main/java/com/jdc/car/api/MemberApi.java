@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +20,18 @@ import com.jdc.car.model.dto.BookingHistoryDto;
 import com.jdc.car.model.dto.MemberInfoDto;
 import com.jdc.car.model.form.LoginForm;
 import com.jdc.car.model.form.MemberForm;
+import com.jdc.car.service.MemberService;
 
 @RestController
 @RequestMapping("member")
 public class MemberApi {
 
+	@Autowired
+	MemberService memberService;
+	
 	@PostMapping("signup")
-	public ApiResponse<Integer> signup(@Validated MemberForm form,BindingResult result) {
-		return null;
+	public ApiResponse<String> signup(@Validated MemberForm form,BindingResult result) {
+		return new ApiResponse<String>(true, memberService.create(form));
 	}
 	
 	@PostMapping

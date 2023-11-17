@@ -17,12 +17,12 @@ import com.jdc.car.model.form.BookingForm;
 public class BookingApi {
 
 	@PostMapping
-	public ApiResponse<BookingResultDto> createBooking(@Validated BookingForm form,BindingResult result){
+	public ApiResponse<BookingForm> createBooking(@Validated BookingForm form,BindingResult result){
 		return null;
 	}
 	
 	@GetMapping("{bookingId}")
-	public ApiResponse<BookingResultDto> takeBooking(int bookingId){
+	public ApiResponse<BookingForm> takeBooking(int bookingId){
 		return null;
 	}
 	

@@ -1,5 +1,6 @@
 package com.jdc.car.model.entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -33,7 +34,7 @@ public class Members {
 	@Column(nullable = false)	
 	private String userPhoto;
 	@Temporal(TemporalType.DATE)
-	private Date dateOfBirth;
+	private LocalDate dateOfBirth;
 
 	private String email;
 

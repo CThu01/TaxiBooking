@@ -15,9 +15,9 @@ public class Car {
 
 	@Id
 	private int id;
-	@Column(nullable = false)
+	@Column(nullable = false,unique = true)
 	private String carNo;
-	@Column(nullable = false)
+	@Column(nullable = false,unique = true)
 	private String carLicense;
 	@Column(nullable = false)
 	private boolean aircon;

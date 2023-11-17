@@ -6,6 +6,7 @@ public record BookingForm(
 		String paymentMethod,
 		String pickupPoint,
 		String destinationPoint,
+		String carNo,
 		boolean aircon,
 		int price
 		
