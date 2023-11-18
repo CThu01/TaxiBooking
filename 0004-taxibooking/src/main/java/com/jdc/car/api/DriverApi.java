@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jdc.car.model.dto.ApiResponse;
 import com.jdc.car.model.dto.BookingHistoryDto;
 import com.jdc.car.model.dto.DriverInfoDto;
 import com.jdc.car.model.dto.MemberInfoDto;
 import com.jdc.car.model.entity.BookingHistory;
 import com.jdc.car.model.form.DriverForm;
 import com.jdc.car.model.form.LoginForm;
+import com.jdc.car.model.output.ApiResponse;
 
 @RestController
 @RequestMapping("driver")

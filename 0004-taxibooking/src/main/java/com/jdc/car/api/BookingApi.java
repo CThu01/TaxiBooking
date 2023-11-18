@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.jdc.car.model.dto.ApiResponse;
 import com.jdc.car.model.dto.BookingResultDto;
 import com.jdc.car.model.form.BookingForm;
+import com.jdc.car.model.output.ApiResponse;
 
 @RestController
 @RequestMapping("booking")

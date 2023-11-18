@@ -1,4 +1,4 @@
-package com.jdc.car.model.dto;
+package com.jdc.car.model.output;
 
 public record ApiResponse<T>(
 		boolean status,
