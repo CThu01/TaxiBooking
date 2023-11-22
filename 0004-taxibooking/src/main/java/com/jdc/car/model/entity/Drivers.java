@@ -2,6 +2,7 @@ package com.jdc.car.model.entity;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +29,8 @@ public class Drivers {
 	@Column(nullable = false)
 	private String NRC;
 	@Column(nullable = false)
+	private String driverLicense;
+	@Column(nullable = false)
 	private String address;
 	@Column(nullable = false)
 	private String driversPhoto;
@@ -40,7 +43,7 @@ public class Drivers {
 	@JoinColumn(nullable = false)
 	private Township township;	
 	
-	@OneToOne(mappedBy = "drivers")
+	@OneToOne(mappedBy = "drivers",cascade = {CascadeType.PERSIST,CascadeType.PERSIST})
 	private Car car;
 	
 

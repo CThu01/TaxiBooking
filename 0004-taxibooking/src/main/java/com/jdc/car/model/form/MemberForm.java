@@ -1,6 +1,7 @@
 package com.jdc.car.model.form;
 
 import java.time.LocalDate;
+import java.util.function.Function;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -22,27 +23,25 @@ public record MemberForm(
 		@NotBlank(message = "Enter Address")
 		String address,
 		@NotBlank(message = "Select Township")
-		String township,
+		Integer township,
 		@NotBlank(message = "Enter password")
 		String password,		
 		String email
 		) {
 	
-	public Members entity(PasswordEncoder encoder) {
+	public Members entity(Function<Integer, Township> townshipFun) {
 		
 		var member = new Members();
 		member.setName(name);
 		member.setDateOfBirth(dob);
 		member.setPhone(phone);
 		member.setNRC(NRC);
-		member.setAddress(address);
-		
-		var tsp = new Township();
-		tsp.setName(township);
-		
-		member.setTownship(tsp);
-		member.setPassword(encoder.encode(password));
+		member.setPassword(password);
 		member.setEmail(email);
+		member.setAddress(address);
+		member.setTownship(townshipFun.apply(township));
+		
+
 		
 		return member;
 	}

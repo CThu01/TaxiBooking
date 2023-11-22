@@ -1,23 +1,15 @@
 package com.jdc.car.model.entity;
 
 import java.time.LocalDate;
-import java.util.Date;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
-import lombok.Data;
 
-@Entity
-@Data
-public class Members {
+public class MembersHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,10 +30,5 @@ public class Members {
 	private LocalDate dateOfBirth;
 
 	private String email;
-
-	@ManyToOne
-	@JoinColumn(nullable = false)	
-	private Township township;
-	
-	
+	private String township;
 }
