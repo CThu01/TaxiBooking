@@ -3,12 +3,14 @@ package com.cthu.car.model.form;
 import java.time.LocalDate;
 import java.util.function.Function;
 
+import com.cthu.car.model.dto.DriverInfoDto;
 import com.cthu.car.model.entity.Car;
 import com.cthu.car.model.entity.CarName;
 import com.cthu.car.model.entity.Drivers;
 import com.cthu.car.model.entity.Township;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record DriverForm(
 		@NotBlank(message = "Enter name")
@@ -25,15 +27,15 @@ public record DriverForm(
 		String carNo,
 		@NotBlank(message = "Enter Car License")
 		String carLicense,
-		@NotBlank(message = "Enter Car Type")
-		String carType,
+		@NotNull(message = "Enter Car Type")
+		Integer typeOfCar,
 		@NotBlank(message = "Enter Password")
 		String password,
 		@NotBlank(message = "Enter Address")
 		String address,
-		@NotBlank(message = "Select TownShip")
+		@NotNull(message = "Select TownShip")
 		Integer township,
-		@NotBlank(message = "aircon serve or not")
+		@NotNull(message = "aircon serve or not")
 		Boolean aircon,
 		String email
 		) {
@@ -53,17 +55,34 @@ public record DriverForm(
 		return driver;
 	}
 	
-	public Car carEntity(Function<Integer, CarName> carNameFun) {
+	public Car carEntity(int driverId,
+			Function<Integer, Drivers> driverFun,
+			Function<Integer, CarName> carNameFun) {
 		
 		var car = new Car();
 		car.setCarNo(carNo);
 		car.setCarLicense(carLicense);
-		car.setAircon(false);
+		car.setAircon(aircon);
+		car.setDrivers(driverFun.apply(driverId));
+		car.setCarName(carNameFun.apply(typeOfCar));
 		
 		return car;
 	}
 	
-	
+	public DriverInfoDto getDriverInfoDto(Drivers driver,Car car) {
+		return new DriverInfoDto(
+				driver.getName(), 
+				driver.getPhone(), 
+				driver.getDateOfBrith(), 
+				driver.getNRC(), 
+				driver.getDriverLicense(), 
+				driver.getAddress(), 
+				driver.getTownship().getName(), 
+				car.getCarNo(), 
+				car.getCarLicense(), 
+				car.getCarName().getName(), 
+				driver.getEmail());
+	}
 	
 	
 	

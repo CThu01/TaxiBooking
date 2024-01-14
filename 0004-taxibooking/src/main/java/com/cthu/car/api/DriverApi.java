@@ -31,8 +31,7 @@ public class DriverApi {
 
 	@PostMapping("signup")
 	public ApiResponse<DriverInfoDto> signup(@Validated DriverForm form,BindingResult result){
-		driverService.create(form);
-		return null;
+		return ApiResponse.success(driverService.create(form));
 	}
 	
 	@PostMapping

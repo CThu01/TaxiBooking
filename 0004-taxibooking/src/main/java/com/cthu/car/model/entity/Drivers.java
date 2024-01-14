@@ -11,6 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
@@ -41,7 +43,8 @@ public class Drivers {
 //	@Column(nullable = false,name = "driver_photo")
 	private String driversPhoto;
 	
-	@Column(nullable = false,name = "date_of_brith")
+	@Temporal(TemporalType.DATE)
+	@Column(name = "date_of_brith")
 	private LocalDate dateOfBrith;
 	
 	private String email;
