@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +20,18 @@ import com.cthu.car.model.dto.MemberInfoDto;
 import com.cthu.car.model.form.DriverForm;
 import com.cthu.car.model.form.LoginForm;
 import com.cthu.car.model.output.ApiResponse;
+import com.cthu.car.service.DriverService;
 
 @RestController
 @RequestMapping("driver")
 public class DriverApi {
+	
+	@Autowired
+	private DriverService driverService;
 
 	@PostMapping("signup")
-	public ApiResponse<Integer> signup(@Validated DriverForm form,BindingResult result){
+	public ApiResponse<DriverInfoDto> signup(@Validated DriverForm form,BindingResult result){
+		driverService.create(form);
 		return null;
 	}
 	

@@ -20,27 +20,35 @@ public class Drivers {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int loginId;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "name")
 	private String name;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "password")
 	private String password;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "phone")
 	private String phone;
+	
 	@Column(nullable = false)
 	private String NRC;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "driver_license")
 	private String driverLicense;
+	
 	@Column(nullable = false)
 	private String address;
-	@Column(nullable = false)
+//	@Column(nullable = false,name = "driver_photo")
 	private String driversPhoto;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "date_of_brith")
 	private LocalDate dateOfBrith;
+	
 	private String email;
 	private int star;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false,name = "township")
 	private Township township;	
 	
 	@OneToOne(mappedBy = "drivers",cascade = {CascadeType.PERSIST,CascadeType.PERSIST})

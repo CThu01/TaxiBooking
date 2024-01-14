@@ -7,7 +7,7 @@ import com.cthu.car.model.entity.Members;
 import com.cthu.car.model.entity.Township;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 
 public record MemberForm(
@@ -21,7 +21,7 @@ public record MemberForm(
 		String NRC,
 		@NotBlank(message = "Enter Address")
 		String address,
-//		@NotEmpty(message = "Select Township")
+		@NotNull(message = "Select Township")
 		Integer township,
 		@NotBlank(message = "Enter password")
 		String password,		
@@ -38,11 +38,27 @@ public record MemberForm(
 		member.setPassword(password);
 		member.setEmail(email);
 		member.setAddress(address);
-		System.out.println(townshipFun.apply(township).getName());
 		member.setTownship(townshipFun.apply(township));
 		
 		return member;
 	}
+	
+	public Members updateEntity(int id,Function<Integer, Township> townshipFun) {
+		
+		var member = new Members();
+		member.setLoginId(id);
+		member.setName(name);
+		member.setDateOfBirth(LocalDate.parse(dob));
+		member.setPhone(phone);
+		member.setNRC(NRC);
+		member.setPassword(password);
+		member.setEmail(email);
+		member.setAddress(address);
+		member.setTownship(townshipFun.apply(township));
+		
+		return member;
+	}
+
 	
 
 	

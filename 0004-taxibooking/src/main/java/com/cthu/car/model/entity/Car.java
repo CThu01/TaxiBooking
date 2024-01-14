@@ -15,18 +15,21 @@ public class Car {
 
 	@Id
 	private int id;
-	@Column(nullable = false,unique = true)
+	
+	@Column(nullable = false,unique = true,name = "car_no")
 	private String carNo;
-	@Column(nullable = false,unique = true)
+	
+	@Column(nullable = false,unique = true,name = "car_license")
 	private String carLicense;
+	
 	@Column(nullable = false)
 	private boolean aircon;
 	
-	@MapsId
 	@OneToOne
+	@MapsId
 	private Drivers drivers;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false,name = "car_name")
 	private CarName carName;
 }

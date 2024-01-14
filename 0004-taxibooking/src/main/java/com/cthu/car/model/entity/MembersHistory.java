@@ -14,19 +14,27 @@ public class MembersHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int loginId;
+	
 	@Column(nullable = false)	
 	private String name;
+	
 	@Column(nullable = false)	
 	private String password;
+	
 	@Column(nullable = false)	
 	private String phone;
+	
 	@Column(nullable = false)	
 	private String NRC;
+	
 	@Column(nullable = false)	
 	private String address;
-	@Column(nullable = false)	
+	
+	@Column(nullable = false,name = "user_photo")	
 	private String userPhoto;
+	
 	@Temporal(TemporalType.DATE)
+	@Column(name = "date_of_birth")
 	private LocalDate dateOfBirth;
 
 	private String email;

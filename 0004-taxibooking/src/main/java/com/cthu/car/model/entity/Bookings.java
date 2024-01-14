@@ -24,25 +24,33 @@ public class Bookings {
 	private int bookingId;
 	
 	@OneToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false,name = "member_id")
 	private Members memberId;
 	
 	@OneToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false,name = "driver_id")
 	private Drivers driverId;
 	
 	@OneToMany(mappedBy = "bookingId")
 	private List<BookingHistory> bookingHistory;
 	
 	private int stars;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "pickup_point")
 	private Point pickupPoint;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "destination_point")
 	private Point destinationPoint;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "booking_time")
 	private LocalDateTime bookingTime;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "departure_time")
 	private LocalDateTime departureTime;
+	
+	@Column(nullable = false,name = "arrival_time")
+	private LocalDateTime arrivalTime;
+	
 	@Column(nullable = false)
 	private Status status;
 	

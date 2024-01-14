@@ -48,14 +48,16 @@ public class MemberApi {
 		return null;
 	}
 	
-	@GetMapping("profile")
-	public ApiResponse<MemberInfoDto> getProfile(@RequestParam String name){
-		return null;
+	
+	@GetMapping("profile/{id}")
+	public ApiResponse<Object> getProfileById(@PathVariable int id){
+		var member = memberService.getProfile(id);
+		return ApiResponse.success(member);
 	}
 	
 	@PutMapping("update/{id}")
 	public ApiResponse<MemberInfoDto> updateProfile(@PathVariable int id,@Validated MemberForm form,BindingResult result){
-		return null;
+		return ApiResponse.success(memberService.profileUpdate(id, form));
 	}
 	
 	

@@ -9,7 +9,7 @@ public record MemberInfoDto(
 		String NRC,
 		String address,
 		LocalDate dob,
-		String memberPhoto
+		String userPhoto
 		){
 
 }

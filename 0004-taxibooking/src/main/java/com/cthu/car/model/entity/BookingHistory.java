@@ -24,19 +24,23 @@ public class BookingHistory {
 	private int transactionHistoryId;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false,name = "booking_id")
 	private Bookings bookingId;
 	
-	@Column(nullable = false)
+	@Column(nullable = false,name = "from_location")
 	private Point fromLocation;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "to_location")
 	private Point toLocation;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "payment_method")
 	private String paymentMethod;
-	@Column(nullable = false)
+	
+	@Column(nullable = false,name = "amount")
 	private int amount;
+	
 	@Temporal(TemporalType.TIME)
-	@Column(nullable = false)
+	@Column(nullable = false,name = "duration")
 	private Date duration;
 	
 }
