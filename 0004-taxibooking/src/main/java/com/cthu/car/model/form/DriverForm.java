@@ -43,6 +43,7 @@ public record DriverForm(
 	public Drivers driverEntity(Function<Integer, Township> townShipFun){
 		
 		var driver = new Drivers();
+		
 		driver.setName(name);
 		driver.setPassword(password);
 		driver.setPhone(phone);
@@ -54,6 +55,24 @@ public record DriverForm(
 		
 		return driver;
 	}
+	
+	public Drivers driverEntity(int id,Function<Integer, Township> townShipFun){
+		
+		var driver = new Drivers();
+		
+		driver.setLoginId(id);
+		driver.setName(name);
+		driver.setPassword(password);
+		driver.setPhone(phone);
+		driver.setNRC(NRC);
+		driver.setDriverLicense(drivingLicense);
+		driver.setAddress(address);
+		driver.setDateOfBrith(LocalDate.parse(dob));
+		driver.setTownship(townShipFun.apply(township));
+		
+		return driver;
+	}
+
 	
 	public Car carEntity(int driverId,
 			Function<Integer, Drivers> driverFun,

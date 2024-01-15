@@ -2,6 +2,8 @@ package com.cthu.car.model.entity;
 
 import java.time.LocalDate;
 
+import com.cthu.car.model.dto.DriverInfoDto;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -57,6 +59,20 @@ public class Drivers {
 	@OneToOne(mappedBy = "drivers",cascade = {CascadeType.PERSIST,CascadeType.PERSIST})
 	private Car car;
 	
+	public DriverInfoDto resultDriverInfoDto(Drivers driver,Car car) {
+		return new DriverInfoDto(
+				driver.getName(), 
+				driver.getPhone(), 
+				driver.getDateOfBrith(), 
+				driver.getNRC(), 
+				driver.getDriverLicense(), 
+				driver.getAddress(), 
+				driver.getTownship().getName(), 
+				car.getCarNo(), 
+				car.getCarLicense(), 
+				car.getCarName().getName(), 
+				driver.getEmail());
+	}
 
 	
 	
