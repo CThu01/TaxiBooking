@@ -3,9 +3,8 @@ package com.cthu.car.model.entity;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import org.locationtech.jts.geom.Point;
-
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -36,11 +35,13 @@ public class Bookings {
 	
 	private int stars;
 	
+	@Embedded
 	@Column(nullable = false,name = "pickup_point")
-	private Point pickupPoint;
+	private GeoLocation pickupPoint;
 	
+	@Embedded
 	@Column(nullable = false,name = "destination_point")
-	private Point destinationPoint;
+	private GeoLocation destinationPoint;
 	
 	@Column(nullable = false,name = "booking_time")
 	private LocalDateTime bookingTime;

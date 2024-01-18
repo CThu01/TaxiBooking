@@ -2,9 +2,8 @@ package com.cthu.car.model.entity;
 
 import java.util.Date;
 
-import org.locationtech.jts.geom.Point;
-
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -27,11 +26,13 @@ public class BookingHistory {
 	@JoinColumn(nullable = false,name = "booking_id")
 	private Bookings bookingId;
 	
+	@Embedded
 	@Column(nullable = false,name = "from_location")
-	private Point fromLocation;
+	private GeoLocation fromLocation;
 	
+	@Embedded
 	@Column(nullable = false,name = "to_location")
-	private Point toLocation;
+	private GeoLocation toLocation;
 	
 	@Column(nullable = false,name = "payment_method")
 	private String paymentMethod;
