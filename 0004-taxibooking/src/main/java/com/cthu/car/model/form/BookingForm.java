@@ -3,13 +3,10 @@ package com.cthu.car.model.form;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 
-import com.cthu.car.model.dto.BookingInfoDto;
 import com.cthu.car.model.entity.Bookings;
 import com.cthu.car.model.entity.Bookings.Status;
 import com.cthu.car.model.entity.Drivers;
 import com.cthu.car.model.entity.Members;
-import com.cthu.car.service.DriverService;
-import com.cthu.car.service.MemberService;
 
 public record BookingForm(
 		int memberId,
@@ -33,10 +30,10 @@ public record BookingForm(
 			Function<Integer, Drivers> driverFun
 			) {
 		
-		
 		Bookings booking = new Bookings();
 		booking.setMemberId(memberFun.apply(memberId));
 		booking.setDriverId(driverFun.apply(driverId));
+		booking.setPaymentMethod(paymentMethod);
 		booking.setStars(stars);
 		booking.setPickupPoint(pickupPoint);
 		booking.setDestinationPoint(destinationPoint);
@@ -47,25 +44,6 @@ public record BookingForm(
 		booking.setAircon(aircon);
 		
 		return booking;
-	}
-	
-	public BookingInfoDto getBookingInfoDto(Bookings booking) {
-
-		MemberService memberService = new MemberService();
-		DriverService driverService = new DriverService();
-		
-		return new BookingInfoDto(
-					memberService.getProfile(booking.getMemberId().getLoginId()), 
-					driverService.getProfileById(booking.getDriverId().getLoginId()), 
-					booking.getPrice(), 
-					booking.getPaymentMethod(),
-					booking.isAircon(), 
-					booking.getPickupPoint(),
-					booking.getDestinationPoint(), 
-					booking.getDepartureTime().toString(), 
-					booking.getArrivalTime().toString(), 
-					booking.getStars(),
-					booking.getStatus().toString());
 	}
 	
 	

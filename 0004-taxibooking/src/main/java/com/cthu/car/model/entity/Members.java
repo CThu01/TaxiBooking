@@ -58,7 +58,8 @@ public class Members {
 	public MemberInfoDto getMemberInfoDto(Members member) {
 		return new MemberInfoDto(
 				member.getLoginId(), 
-				member.getName(), member.getPhone(),
+				member.getName(), 
+				member.getPhone(),
 				member.getNRC(),
 				member.getAddress(),
 				member.getDateOfBirth(),

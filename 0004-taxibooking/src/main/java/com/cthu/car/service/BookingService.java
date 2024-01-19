@@ -22,13 +22,37 @@ public class BookingService {
 	
 	@Autowired
 	private DriversRepo driverRepo;
-
+	
+	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
+	private DriverService driverService;
+	
 	public BookingInfoDto create(BookingForm form) {
 		
 		Bookings booking = bookingsRepo.save(form.getBooking(
 					id -> memberRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Member Id"))
 				   ,id -> driverRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Driver Id"))
 				   ));
-		return form.getBookingInfoDto(booking);
+		return getBookingInfoDto(booking);
 	}
+	
+	private BookingInfoDto getBookingInfoDto(Bookings booking) {
+				
+		return new BookingInfoDto(
+					memberService.getProfile(booking.getMemberId().getLoginId()), 
+					driverService.getProfileById(booking.getDriverId().getLoginId()), 
+					booking.getPrice(), 
+					booking.getPaymentMethod(),
+					booking.isAircon(), 
+					booking.getPickupPoint(),
+					booking.getDestinationPoint(), 
+					booking.getDepartureTime().toString(), 
+					booking.getArrivalTime().toString(), 
+					booking.getStars(),
+					booking.getStatus().toString());
+	}
+	
+
 }

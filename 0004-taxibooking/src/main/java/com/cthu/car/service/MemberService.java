@@ -38,7 +38,6 @@ public class MemberService {
 		return members.getMemberInfoDto(member);
 	}
 
-
 	public MemberInfoDto profileUpdate(int id, MemberForm form) {
 		
 		var updatedMember = memberRepo.save(form.updateEntity(id,profileId -> townshipRepo.findById(id)
