@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cthu.car.model.dto.BookingInfoDto;
 import com.cthu.car.model.form.BookingForm;
 import com.cthu.car.model.output.ApiResponse;
 import com.cthu.car.service.BookingService;
@@ -20,9 +21,8 @@ public class BookingApi {
 	private BookingService bookingService;
 
 	@PostMapping
-	public ApiResponse<BookingForm> createBooking(@Validated BookingForm form,BindingResult result){
-		bookingService.create(form);
-		return null;
+	public ApiResponse<BookingInfoDto> createBooking(@Validated BookingForm form,BindingResult result){
+		return ApiResponse.success(bookingService.create(form));
 	}
 	
 	@GetMapping("{bookingId}")

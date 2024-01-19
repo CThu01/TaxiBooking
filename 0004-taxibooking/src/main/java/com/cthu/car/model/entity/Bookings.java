@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,13 +34,11 @@ public class Bookings {
 	
 	private int stars;
 	
-	@Embedded
 	@Column(nullable = false,name = "pickup_point")
-	private GeoLocation pickupPoint;
+	private String pickupPoint;
 	
-	@Embedded
 	@Column(nullable = false,name = "destination_point")
-	private GeoLocation destinationPoint;
+	private String destinationPoint;
 	
 	@Column(nullable = false,name = "booking_time")
 	private LocalDateTime bookingTime;
@@ -54,6 +51,15 @@ public class Bookings {
 	
 	@Column(nullable = false)
 	private Status status;
+	
+	@Column(nullable = false)
+	private boolean aircon;
+	
+	@Column(nullable = false)
+	private int price;
+	
+	@Column(nullable = false)
+	private String paymentMethod;
 	
 	
 	public enum Status{
