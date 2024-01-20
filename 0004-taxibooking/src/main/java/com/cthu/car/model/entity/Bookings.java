@@ -65,6 +65,5 @@ public class Bookings {
 	public enum Status{
 		Completed,Pending,Cancelled
 	}
-	
-	
+		
 }

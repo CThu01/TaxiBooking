@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cthu.car.model.dto.BookingHistoryDto;
+import com.cthu.car.model.dto.BookingHistoryInfoDto;
 import com.cthu.car.model.dto.DriverInfoDto;
 import com.cthu.car.model.form.DriverForm;
 import com.cthu.car.model.form.LoginForm;
@@ -40,7 +40,7 @@ public class DriverApi {
 	}
 	
 	@GetMapping
-	public List<ApiResponse<BookingHistoryDto>> getBookingHistory(
+	public List<ApiResponse<BookingHistoryInfoDto>> getBookingHistory(
 			@RequestParam String name,
 			@RequestParam Optional<LocalDate> from,
 			@RequestParam Optional<LocalDate> to

@@ -1,6 +1,6 @@
 package com.cthu.car.model.entity;
 
-import java.util.Date;
+import java.time.Duration;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,12 +9,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class BookingHistory {
 
 	@Id
@@ -37,8 +39,10 @@ public class BookingHistory {
 	@Column(nullable = false,name = "amount")
 	private int amount;
 	
-	@Temporal(TemporalType.TIME)
 	@Column(nullable = false,name = "duration")
-	private Date duration;
+	private Duration duration;
+	
+	@Column(nullable = false,name = "version")
+	private int version;
 	
 }

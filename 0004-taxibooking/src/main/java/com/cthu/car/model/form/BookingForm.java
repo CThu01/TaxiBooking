@@ -8,19 +8,34 @@ import com.cthu.car.model.entity.Bookings.Status;
 import com.cthu.car.model.entity.Drivers;
 import com.cthu.car.model.entity.Members;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+
 public record BookingForm(
+		@NotNull(message = "Enter member id")
 		int memberId,
+		@NotNull(message = "Enter driver id")
 		int driverId,
+		@NotEmpty(message = "Enter Payment Method")
 		String paymentMethod,
+		@NotEmpty(message = "Choose Pickup Point")
 		String pickupPoint,
+		@NotEmpty(message = "Choose Destination Point")
 		String destinationPoint,
+		@NotEmpty(message = "Enter Car No")
 		String carNo,
+		@NotEmpty(message = "Enter Booking Time")
 		String bookingTime,
+		@NotEmpty(message = "Enter Departure Time")
 		String departureTime,
+		@NotEmpty(message = "Enter Arriaval Time")
 		String arrivalTime,
+		@NotNull(message = "aircon or not")
 		boolean aircon,
+		@NotNull(message = "Enter Price")
 		int price,
 		int stars,
+		@NotEmpty(message = "Choose status")
 		String status
 		) {
 	

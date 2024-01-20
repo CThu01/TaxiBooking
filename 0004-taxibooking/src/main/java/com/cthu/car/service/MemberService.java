@@ -18,7 +18,7 @@ public class MemberService {
 	
 	@Autowired
 	private TownshipRepo townshipRepo;
-	
+		
 
 	public String create(MemberForm form) {
 		memberRepo.save(form.entity(id -> townshipRepo.findById(id)
@@ -46,6 +46,9 @@ public class MemberService {
 		Members members = new Members();
 		return members.getMemberInfoDto(updatedMember);
 	}
+
+
+	
 }
 
 
