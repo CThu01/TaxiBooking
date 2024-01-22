@@ -1,5 +1,6 @@
 package com.cthu.car.model.entity;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,10 +12,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "bookings")
 public class Bookings {
 
 	@Id
@@ -28,6 +31,9 @@ public class Bookings {
 	@OneToOne
 	@JoinColumn(nullable = false,name = "driver_id")
 	private Drivers driverId;
+	
+	@Column(nullable = false)
+	private LocalDate date;
 	
 	@OneToMany(mappedBy = "bookingId")
 	private List<BookingHistory> bookingHistory;

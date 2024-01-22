@@ -3,6 +3,7 @@ package com.cthu.car.api;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cthu.car.model.dto.BookingHistoryInfoDto;
 import com.cthu.car.model.dto.MemberInfoDto;
+import com.cthu.car.model.form.BookingSearchForm;
 import com.cthu.car.model.form.LoginForm;
 import com.cthu.car.model.form.MemberForm;
 import com.cthu.car.model.output.ApiResponse;
@@ -46,14 +49,15 @@ public class MemberApi {
 		return ApiResponse.success(bookingService.getAllBookingHistory(id));
 	}
 	
-//	@GetMapping
-//	public List<ApiResponse<BookingHistoryDto>> getBookingHistroy(
-//			@RequestParam String name,
-//			@RequestParam Optional<LocalDate> from,
-//			@RequestParam Optional<LocalDate> to
-//			){
+	@GetMapping
+	public Page<BookingHistoryInfoDto> getBookingHistroy(
+			BookingSearchForm form,
+			@RequestParam(required = false,defaultValue = "0") int page,
+			@RequestParam(required = false,defaultValue = "10") int size
+			){
+		return bookingService.search(form,page,size);
 //		return null;
-//	}
+	}
 	
 	
 	@GetMapping("profile/{id}")

@@ -5,6 +5,8 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
+//@EnableJpaAuditing
+//@EnableJpaRepositories(repositoryBaseClass = BaseRepoImpl.class)
 public class MvcConfiguration implements WebMvcConfigurer{
 
 	@Override

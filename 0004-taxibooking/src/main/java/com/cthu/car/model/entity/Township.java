@@ -24,3 +24,5 @@ public class Township {
 	@OneToMany(mappedBy = "township")
 	private List<Drivers> drivers;
 }
+
+

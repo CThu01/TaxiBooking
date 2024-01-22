@@ -1,5 +1,6 @@
 package com.cthu.car.model.form;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.function.Function;
 
@@ -26,6 +27,8 @@ public record BookingForm(
 		String carNo,
 		@NotEmpty(message = "Enter Booking Time")
 		String bookingTime,
+		@NotNull(message = "Enter Date")
+		String date,
 		@NotEmpty(message = "Enter Departure Time")
 		String departureTime,
 		@NotEmpty(message = "Enter Arriaval Time")
@@ -53,6 +56,7 @@ public record BookingForm(
 		booking.setPickupPoint(pickupPoint);
 		booking.setDestinationPoint(destinationPoint);
 		booking.setBookingTime(LocalDateTime.parse(bookingTime));
+		booking.setDate(LocalDate.parse(date));
 		booking.setDepartureTime(LocalDateTime.parse(departureTime));
 		booking.setArrivalTime(LocalDateTime.parse(arrivalTime));
 		booking.setStatus(Status.valueOf(status));
