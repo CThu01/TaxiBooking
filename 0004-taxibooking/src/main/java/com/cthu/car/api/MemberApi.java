@@ -44,9 +44,9 @@ public class MemberApi {
 	}
 	
 	@GetMapping("profile/bookingHistory/{id}")
-	public ApiResponse<List<BookingHistoryInfoDto>> getAllBookingHistory(@PathVariable int id){
+	public ApiResponse<List<BookingHistoryInfoDto>> getAllMemberBookingHistory(@PathVariable int id){
 		
-		return ApiResponse.success(bookingService.getAllBookingHistory(id));
+		return ApiResponse.success(bookingService.getAllBookingHistory(id,"member"));
 	}
 	
 	@GetMapping
@@ -56,7 +56,6 @@ public class MemberApi {
 			@RequestParam(required = false,defaultValue = "10") int size
 			){
 		return bookingService.search(form,page,size);
-//		return null;
 	}
 	
 	

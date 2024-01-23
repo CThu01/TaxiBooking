@@ -64,21 +64,21 @@ public class BookingService {
 	}
 	
 	
-	public List<BookingHistoryInfoDto> getAllBookingHistory(int id) {
+	public List<BookingHistoryInfoDto> getAllBookingHistory(int id,String forWhom) {
 
 		List<BookingHistoryInfoDto> bookingHistoryList = new ArrayList<BookingHistoryInfoDto>();
 		List<BookingHistory> bookingHistoryResult = bookingHistoryRepo.findAll();
 		
 		for(BookingHistory bookingHistory : bookingHistoryResult) {
-			bookingHistoryList.add(getInfoDto(bookingHistory,id)); 
+			bookingHistoryList.add(outerGetInfoDto(bookingHistory,forWhom,id)); 
 		}
 		return bookingHistoryList;
 	}
 	
-	private BookingHistoryInfoDto getInfoDto(BookingHistory historyResult,int id) {
+	private BookingHistoryInfoDto outerGetInfoDto(BookingHistory historyResult,String forWhom,int id) {
 		
 		return new BookingHistoryInfoDto(
-				getBookingInfoDto(historyResult.getBookingId(),"member",id), 
+				getBookingInfoDto(historyResult.getBookingId(),forWhom,id), 
 				historyResult.getFromLocation(),
 				historyResult.getToLocation(),
 				historyResult.getPaymentMethod(), 
@@ -150,9 +150,9 @@ public class BookingService {
 	@Transactional(readOnly = true)
 	public Page<BookingHistoryInfoDto> search(BookingSearchForm form, int page, int size) {
 		
-		Function<CriteriaBuilder, CriteriaQuery<BookingHistoryInfoDto>> queryFunc = 
+		Function<CriteriaBuilder, CriteriaQuery<BookingHistory>> queryFunc = 
 				cb -> {
-					var query = cb.createQuery(BookingHistoryInfoDto.class);
+					var query = cb.createQuery(BookingHistory.class);
 					var root = query.from(BookingHistory.class);
 					BookingHistoryInfoDto.select(query,root);
 					query.where(form.where(cb,root));
@@ -167,7 +167,19 @@ public class BookingService {
 					query.where(form.where(cb, root));
 					return query;
 				};
-		return bookingHistoryRepo.findAll(queryFunc,countFunc,page,size);
+				
+		Page<BookingHistory> bookingHistoryPage =  bookingHistoryRepo.findAll(queryFunc,countFunc,page,size);
+				
+		return bookingHistoryPage.map(this::convertToBookingHistoryInfoDto);
+	}
+
+
+	private BookingHistoryInfoDto convertToBookingHistoryInfoDto(BookingHistory bookingHistory) {
+
+		return outerGetInfoDto(
+				bookingHistory,
+				"member",
+				bookingHistory.getBookingId().getMemberId().getLoginId());
 	}
 	
 	

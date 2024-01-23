@@ -52,6 +52,7 @@ public record BookingForm(
 		booking.setMemberId(memberFun.apply(memberId));
 		booking.setDriverId(driverFun.apply(driverId));
 		booking.setPaymentMethod(paymentMethod);
+		booking.setPrice(price);
 		booking.setStars(stars);
 		booking.setPickupPoint(pickupPoint);
 		booking.setDestinationPoint(destinationPoint);

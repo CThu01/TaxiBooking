@@ -22,27 +22,38 @@ public class BookingHistory {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int transactionHistoryId;
-	
+
 	@ManyToOne
-	@JoinColumn(nullable = false,name = "booking_id")
+	@JoinColumn(nullable = false, name = "booking_id")
 	private Bookings bookingId;
-	
-	@Column(nullable = false,name = "from_location")
+
+	@Column(nullable = false, name = "from_location")
 	private String fromLocation;
-	
-	@Column(nullable = false,name = "to_location")
+
+	@Column(nullable = false, name = "to_location")
 	private String toLocation;
-	
-	@Column(nullable = false,name = "payment_method")
+
+	@Column(nullable = false, name = "payment_method")
 	private String paymentMethod;
-	
-	@Column(nullable = false,name = "amount")
+
+	@Column(nullable = false, name = "amount")
 	private int amount;
-	
-	@Column(nullable = false,name = "duration")
+
+	@Column(nullable = false, name = "duration")
 	private Duration duration;
-	
-	@Column(nullable = false,name = "version")
+
+	@Column(nullable = false, name = "version")
 	private int version;
-	
+
+//	public BookingHistory(Bookings bookingId, String fromLocation, String toLocation, String paymentMethod, int amount,
+//			Duration duration, int version) {
+//		this.bookingId = bookingId;
+//		this.fromLocation = fromLocation;
+//		this.toLocation = toLocation;
+//		this.paymentMethod = paymentMethod;
+//		this.amount = amount;
+//		this.duration = duration;
+//		this.version = version;
+//	}
+
 }

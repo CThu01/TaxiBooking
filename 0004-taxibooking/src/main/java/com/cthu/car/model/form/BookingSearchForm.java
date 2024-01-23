@@ -15,8 +15,8 @@ public record BookingSearchForm(
 		String name,
 		LocalDate dateFrom,
 		LocalDate dateTo,
-		int priceFrom,
-		int priceTo,
+		Integer priceFrom,
+		Integer priceTo,
 		String carNo,
 		String carLicense,
 		String driverLicense
@@ -46,28 +46,29 @@ public record BookingSearchForm(
 			predicateList.add(predicate);
 		}
 		
-		if( priceFrom != 0) {
+		if( null != priceFrom && priceFrom > 0) {
 			var predicate = cb.greaterThanOrEqualTo(booking.get("price"), priceFrom);
 			predicateList.add(predicate);
 		}
 		
-		if( priceTo != 0) {
+		if( null != priceTo && priceTo > 0) {
 			var predicate = cb.lessThanOrEqualTo(booking.get("price"), priceTo);
 			predicateList.add(predicate);
 		}
 		
-		if( null != carNo) {
+		if( null != carNo && !carNo.isEmpty()) {
 			var predicate = cb.like(booking.get("driverId").get("car").get("carNo"), carNo);
 			predicateList.add(predicate);
 		}
 		
-		if( null != carLicense) {
+		if( null != carLicense && !carLicense.isEmpty()) {
 			var predicate = cb.like(booking.get("driverId").get("car").get("carLicense"), carLicense);
 			predicateList.add(predicate);
 		}
 
-		if( null != driverLicense) {
+		if( null != driverLicense && !driverLicense.isEmpty()) {
 			var predicate = cb.like(booking.get("driverId").get("driverLicense"), driverLicense);
+			System.out.println(driverLicense);
 			predicateList.add(predicate);
 		}
 		

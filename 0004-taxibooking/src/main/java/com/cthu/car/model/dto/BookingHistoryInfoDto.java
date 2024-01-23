@@ -21,9 +21,10 @@ public class BookingHistoryInfoDto {
 		private String duration;
 		private int version;
 		
-		public static void select(CriteriaQuery<BookingHistoryInfoDto> query, Root<BookingHistory> root) {
+		public static void select(CriteriaQuery<BookingHistory> query, Root<BookingHistory> root) {
 			
 			query.multiselect(
+					root.get("transactionHistoryId"),
 					root.get("bookingId"),
 					root.get("fromLocation"),
 					root.get("toLocation"),
@@ -32,7 +33,6 @@ public class BookingHistoryInfoDto {
 					root.get("duration"),
 					root.get("version")
 					);
-		}
-		 
+		}		 
 
 }
