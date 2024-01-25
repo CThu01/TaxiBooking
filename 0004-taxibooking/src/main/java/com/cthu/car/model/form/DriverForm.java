@@ -102,6 +102,34 @@ public record DriverForm(
 				car.getCarName().getName(), 
 				driver.getEmail());
 	}
+
+	public Drivers avoideDriverError(int id, Drivers existingDriver, Function<Integer, Township> townshipFun) {
+		
+		existingDriver.setLoginId(id);
+		existingDriver.setName(name);
+		existingDriver.setPassword(password);
+		existingDriver.setPhone(phone);
+		existingDriver.setNRC(NRC);
+		existingDriver.setDriverLicense(drivingLicense);
+		existingDriver.setAddress(address);
+		existingDriver.setDateOfBrith(LocalDate.parse(dob));
+		existingDriver.setEmail(email);
+		existingDriver.setTownship(townshipFun.apply(township));
+		
+		return existingDriver;
+	}
+
+	public Car avoidCarError(Car existingCar, Drivers existingDriver, Function<Integer, CarName> carNameFunc) {
+		
+		existingCar.setCarNo(carNo);
+		existingCar.setCarLicense(carLicense);
+		existingCar.isAircon();
+		existingCar.setDrivers(existingDriver);
+		existingCar.setCarName(carNameFunc.apply(typeOfCar));
+		
+		return existingCar;
+		
+	}
 	
 	
 	

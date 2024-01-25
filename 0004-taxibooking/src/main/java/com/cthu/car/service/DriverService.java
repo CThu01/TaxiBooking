@@ -56,19 +56,28 @@ public class DriverService {
 	@Transactional
 	public DriverInfoDto update(int id, DriverForm form) {
 		
-		Drivers updateDriver = driverRepo.save(form.driverEntity(id, 
-										loginId -> townshipRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Township for Update"))));
+//		Drivers updateDriver = driverRepo.save(form.driverEntity(id, 
+//										loginId -> townshipRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Township for Update"))));
 		
 		
+		Drivers existingDriver = driverRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Driver Id"));
+		Drivers settingDriver = form.avoideDriverError(id,existingDriver,
+										townshipId -> townshipRepo.findById(townshipId).orElseThrow(() -> new ApiBusinessException("Invalid Township Id for Update")));
+		Drivers updatedDriver = driverRepo.save(settingDriver);
 		
-		Car updateCar = carRepo.save(form.carEntity(
-				updateDriver.getLoginId(),
-				loginId -> driverRepo.findById(loginId)
-				.orElseThrow(() -> new ApiBusinessException("Invalid Driver Id for Update ")), 
-				loginId -> carNameRepo.findById(loginId)
-				.orElseThrow(() -> new ApiBusinessException("Invalid Township Id for Update"))
-				));
+//		Car updateCar = carRepo.save(form.carEntity(
+//				updateDriver.getLoginId(),
+//				loginId -> driverRepo.findById(loginId)
+//				.orElseThrow(() -> new ApiBusinessException("Invalid Driver Id for Update ")), 
+//				loginId -> carNameRepo.findById(loginId)
+//				.orElseThrow(() -> new ApiBusinessException("Invalid Township Id for Update"))
+//				));
 		
-		return form.getDriverInfoDto(updateDriver, updateCar);
+		Car existingCar = carRepo.findByDrivers(existingDriver);
+		Car settingCar =  form.avoidCarError(existingCar,existingDriver,
+				carNameId -> carNameRepo.findById(carNameId).orElseThrow(() -> new ApiBusinessException("Invalid CarName id for upated")));
+		Car updatedCar = carRepo.save(settingCar);
+		
+		return form.getDriverInfoDto(updatedDriver, updatedCar);
 	}
 }
