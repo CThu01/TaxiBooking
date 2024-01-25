@@ -56,7 +56,7 @@ public class Drivers {
 	@JoinColumn(nullable = false,name = "township")
 	private Township township;	
 	
-	@OneToOne(mappedBy = "drivers",cascade = {CascadeType.PERSIST,CascadeType.PERSIST})
+	@OneToOne(mappedBy = "drivers",cascade = {CascadeType.ALL})
 	private Car car;
 	
 	public DriverInfoDto resultDriverInfoDto(Drivers driver,Car car) {

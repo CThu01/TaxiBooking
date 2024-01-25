@@ -2,6 +2,7 @@ package com.cthu.car.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cthu.car.model.dto.DriverInfoDto;
 import com.cthu.car.model.entity.Car;
@@ -52,10 +53,13 @@ public class DriverService {
 		return driverResult.resultDriverInfoDto(driver, car);
 	}
 
+	@Transactional
 	public DriverInfoDto update(int id, DriverForm form) {
 		
 		Drivers updateDriver = driverRepo.save(form.driverEntity(id, 
 										loginId -> townshipRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Township for Update"))));
+		
+		
 		
 		Car updateCar = carRepo.save(form.carEntity(
 				updateDriver.getLoginId(),
