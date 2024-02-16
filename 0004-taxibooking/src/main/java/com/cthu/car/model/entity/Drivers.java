@@ -1,6 +1,7 @@
 package com.cthu.car.model.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.cthu.car.model.dto.DriverInfoDto;
 
@@ -12,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -42,6 +44,7 @@ public class Drivers {
 	
 	@Column(nullable = false)
 	private String address;
+	
 //	@Column(nullable = false,name = "driver_photo")
 	private String driversPhoto;
 	
@@ -49,6 +52,7 @@ public class Drivers {
 	@Column(name = "date_of_brith")
 	private LocalDate dateOfBrith;
 	
+	@Column(nullable = false)
 	private String email;
 	private int star;
 	
@@ -58,6 +62,9 @@ public class Drivers {
 	
 	@OneToOne(mappedBy = "drivers",cascade = {CascadeType.ALL})
 	private Car car;
+	
+	@OneToMany(mappedBy = "driverId")
+	private List<DriversHistory> driverHistory;
 	
 	public DriverInfoDto resultDriverInfoDto(Drivers driver,Car car) {
 		return new DriverInfoDto(

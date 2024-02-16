@@ -1,6 +1,7 @@
 package com.cthu.car.model.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.cthu.car.model.dto.MemberInfoDto;
 
@@ -11,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -50,6 +52,9 @@ public class Members {
 	private LocalDate dateOfBirth;
 
 	private String email;
+	
+	@OneToMany(mappedBy = "memberId")
+	private List<MembersHistory> memberHistory;
 
 	@ManyToOne
 	@JoinColumn(nullable = false,name = "township")	

@@ -19,40 +19,59 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MembersHistory {
+public class DriversHistory {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int memberHistoryId;
+	private int driverHistoryId;
 	
 	@ManyToOne
 	@JoinColumn(nullable = false)
-	private Members memberId;
+	private Drivers driverId;
 	
-	@Column(nullable = false)	
+	@Column(nullable = false)
 	private String name;
-	
-	@Column(nullable = false)	
+
+	@Column(nullable = false)
 	private String password;
 	
-	@Column(nullable = false)	
+	@Column(nullable = false)
 	private String phone;
-	
-	@Column(nullable = false)	
+
+	@Column(nullable = false)
 	private String NRC;
+
+	@Column(nullable = false)
+	private String driverLicense;
 	
-	@Column(nullable = false)	
+	@Column(nullable = false)
 	private String address;
+	
+//	@Column(nullable = false)
+	private String driverPhoto;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(nullable = false)
+	private LocalDate dateOfBrith;
+	
+	@Column(nullable = false)
+	private String email;
 	
 	@Column(nullable = false)
 	private String township;
 	
-	@Column(nullable = false,name = "user_photo")	
-	private String userPhoto;
+	@Column(nullable = false)
+	private String carNo;
 	
-	@Temporal(TemporalType.DATE)
-	@Column(name = "date_of_birth")
-	private LocalDate dateOfBirth;
+	@Column(nullable = false)
+	private String carLicense;
+	
+	@Column(nullable = false)
+	private boolean aircon;
+	
+	@Column(nullable = false)
+	private String carName;
+	
+	private int star;
 
-	private String email;
 }
