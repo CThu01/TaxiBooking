@@ -54,15 +54,31 @@ public class BookingService {
 	public BookingInfoDto create(BookingForm form) {
 		
 		Bookings booking = bookingsRepo.save(form.getBooking(
-					id -> membersRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Member Id"))
-				   ,id -> driverRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Driver Id"))
+					id -> membersRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Member Id")),
+				    id -> driverRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Driver Id"))
 				   ));
 		
 		eventPublisher.publishEvent(booking);
 		
 		return getBookingInfoDto(booking,"create",0);
 	}
-	
+
+	public BookingInfoDto update(int id, BookingForm form) {
+		
+		Bookings exitingBooking = bookingsRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Booking Id"));
+		
+		Bookings toUpdateBooking = form.toUpdateBooking(id,exitingBooking,
+				memberId -> membersRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Member Id")),
+				driverId -> driverRepo.findById(id).orElseThrow(() -> new ApiBusinessException("Invalid Driver Id"))
+				);
+		
+		Bookings updatedBooking = bookingsRepo.save(toUpdateBooking);
+		
+		eventPublisher.publishEvent(updatedBooking);
+		
+		return getBookingInfoDto(updatedBooking, "update", id);
+	}
+
 	
 	public List<BookingHistoryInfoDto> getAllBookingHistory(int id,String forWhom) {
 
@@ -181,6 +197,8 @@ public class BookingService {
 				"member",
 				bookingHistory.getBookingId().getMemberId().getLoginId());
 	}
+
+
 	
 	
 	

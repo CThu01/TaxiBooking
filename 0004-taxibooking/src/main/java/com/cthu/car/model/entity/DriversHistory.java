@@ -26,7 +26,7 @@ public class DriversHistory {
 	private int driverHistoryId;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false,name = "driver_id")
 	private Drivers driverId;
 	
 	@Column(nullable = false)
@@ -49,12 +49,15 @@ public class DriversHistory {
 	
 //	@Column(nullable = false)
 	private String driverPhoto;
+
+	@Column(nullable = false)
+	private int version;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(nullable = false)
 	private LocalDate dateOfBrith;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String email;
 	
 	@Column(nullable = false)

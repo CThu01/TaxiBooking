@@ -26,7 +26,7 @@ public class MembersHistory {
 	private int memberHistoryId;
 	
 	@ManyToOne
-	@JoinColumn(nullable = false)
+	@JoinColumn(nullable = false,name = "member_id")
 	private Members memberId;
 	
 	@Column(nullable = false)	
@@ -47,12 +47,16 @@ public class MembersHistory {
 	@Column(nullable = false)
 	private String township;
 	
-	@Column(nullable = false,name = "user_photo")	
+//	@Column(nullable = false,name = "user_photo")	
 	private String userPhoto;
+	
+	@Column(nullable = false)
+	private int version;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "date_of_birth")
 	private LocalDate dateOfBirth;
 
+	
 	private String email;
 }

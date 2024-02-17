@@ -52,7 +52,7 @@ public class Drivers {
 	@Column(name = "date_of_brith")
 	private LocalDate dateOfBrith;
 	
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String email;
 	private int star;
 	

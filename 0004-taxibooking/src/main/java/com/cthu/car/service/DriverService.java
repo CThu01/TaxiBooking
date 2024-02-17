@@ -1,6 +1,7 @@
 package com.cthu.car.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,6 +29,9 @@ public class DriverService {
 	
 	@Autowired
 	private CarNameRepo carNameRepo;
+	
+	@Autowired
+	private ApplicationEventPublisher eventPublisher;
 
 	public DriverInfoDto create(DriverForm form) {
 		
@@ -41,6 +45,9 @@ public class DriverService {
 					id -> carNameRepo.findById(id)
 					.orElseThrow(() -> new ApiBusinessException("Invalid Township Id"))
 					));
+		
+		eventPublisher.publishEvent(driver);
+		
 		return form.getDriverInfoDto(driver, car);
 	}
 
@@ -77,6 +84,8 @@ public class DriverService {
 		Car settingCar =  form.avoidCarError(existingCar,existingDriver,
 				carNameId -> carNameRepo.findById(carNameId).orElseThrow(() -> new ApiBusinessException("Invalid CarName id for upated")));
 		Car updatedCar = carRepo.save(settingCar);
+		
+		eventPublisher.publishEvent(updatedDriver);
 		
 		return form.getDriverInfoDto(updatedDriver, updatedCar);
 	}

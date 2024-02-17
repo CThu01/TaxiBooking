@@ -1,6 +1,7 @@
 package com.cthu.car.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import com.cthu.car.model.dto.MemberInfoDto;
@@ -18,11 +19,18 @@ public class MemberService {
 	
 	@Autowired
 	private TownshipRepo townshipRepo;
+	
+	@Autowired
+	private ApplicationEventPublisher eventPublisher;
 		
 
 	public String create(MemberForm form) {
-		memberRepo.save(form.entity(id -> townshipRepo.findById(id)
+		
+		Members member = memberRepo.save(form.entity(id -> townshipRepo.findById(id)
 				      	.orElseThrow(() -> new ApiBusinessException("Invalid Township Id"))));
+		
+		eventPublisher.publishEvent(member);
+		
 		return "Member is created successfully";
 	}
 
@@ -35,6 +43,7 @@ public class MemberService {
 			throw new ApiBusinessException("Member doesn't exit");
 		}
 		Members members = new Members();
+		
 		return members.getMemberInfoDto(member);
 	}
 
@@ -44,6 +53,9 @@ public class MemberService {
 				.orElseThrow(() -> new ApiBusinessException("Member doesn't exit"))));
 		
 		Members members = new Members();
+		
+		eventPublisher.publishEvent(updatedMember);
+		
 		return members.getMemberInfoDto(updatedMember);
 	}
 

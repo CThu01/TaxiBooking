@@ -65,6 +65,29 @@ public record BookingForm(
 		
 		return booking;
 	}
+
+	public Bookings toUpdateBooking(int id, Bookings existingBooking,
+			Function<Integer, Members> memberFun,
+			Function<Integer, Drivers> driverFun
+			) {
+
+		existingBooking.setBookingId(id);
+		existingBooking.setMemberId(memberFun.apply(memberId));
+		existingBooking.setDriverId(driverFun.apply(driverId));
+		existingBooking.setPaymentMethod(paymentMethod);
+		existingBooking.setPrice(price);
+		existingBooking.setStars(stars);
+		existingBooking.setPickupPoint(pickupPoint);
+		existingBooking.setDestinationPoint(destinationPoint);
+		existingBooking.setBookingTime(LocalDateTime.parse(bookingTime));
+		existingBooking.setDate(LocalDate.parse(date));
+		existingBooking.setDepartureTime(LocalDateTime.parse(departureTime));
+		existingBooking.setArrivalTime(LocalDateTime.parse(arrivalTime));
+		existingBooking.setStatus(Status.valueOf(status));
+		existingBooking.setAircon(aircon);
+		
+		return existingBooking;
+	}
 	
 	
 	
